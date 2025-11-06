@@ -1,0 +1,169 @@
+# FastAPI Calculator
+
+A simple calculator API built with FastAPI that performs basic arithmetic operations.
+
+## Features
+
+- Addition
+- Subtraction
+- Multiplication
+- Division (with zero-division error handling)
+- Interactive API documentation (Swagger UI)
+- Input validation with Pydantic
+
+## Requirements
+
+- Python 3.7+
+- FastAPI
+- Uvicorn
+- Pydantic
+
+## Installation
+
+1. Create a virtual environment (recommended):
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+## Running the Application
+
+Start the server:
+```bash
+python main.py
+```
+
+Or use uvicorn directly:
+```bash
+uvicorn main:app --reload
+```
+
+The application will be available at: `http://localhost:8000`
+
+## API Documentation
+
+Once the server is running, visit:
+- Swagger UI: `http://localhost:8000/docs`
+- ReDoc: `http://localhost:8000/redoc`
+
+## API Endpoints
+
+### GET /
+Returns a welcome message and available endpoints.
+
+### POST /calculate
+Performs arithmetic calculations.
+
+**Request Body:**
+```json
+{
+  "num1": 10,
+  "num2": 5,
+  "operation": "add"
+}
+```
+
+**Supported Operations:**
+- `add` - Addition
+- `subtract` - Subtraction
+- `multiply` - Multiplication
+- `divide` - Division
+
+**Response:**
+```json
+{
+  "result": 15.0,
+  "operation": "add",
+  "num1": 10.0,
+  "num2": 5.0
+}
+```
+
+### GET /health
+Health check endpoint.
+
+## Example Usage
+
+Using curl:
+```bash
+# Addition
+curl -X POST "http://localhost:8000/calculate" \
+  -H "Content-Type: application/json" \
+  -d '{"num1": 10, "num2": 5, "operation": "add"}'
+
+# Division
+curl -X POST "http://localhost:8000/calculate" \
+  -H "Content-Type: application/json" \
+  -d '{"num1": 20, "num2": 4, "operation": "divide"}'
+```
+
+## Error Handling
+
+The API handles common errors:
+- Division by zero returns a 400 error
+- Invalid operations return a 400 error with supported operations list
+- Invalid input types are caught by Pydantic validation
+
+## Testing
+
+The project includes comprehensive tests:
+
+### Test Categories
+- **Unit Tests** (`tests/test_operations.py`): 37 tests for calculator functions
+- **Integration Tests** (`tests/test_main.py`): 37 tests for API endpoints
+- **End-to-End Tests** (`tests/test_e2e.py`): Playwright tests for user interactions
+
+### Running Tests
+
+Install test dependencies:
+```bash
+pip install -r requirements-test.txt
+playwright install chromium
+```
+
+Run all tests:
+```bash
+./run_tests.sh
+```
+
+Or run specific test categories:
+```bash
+# Unit tests only
+pytest tests/test_operations.py -v
+
+# Integration tests only
+pytest tests/test_main.py -v
+
+# E2E tests (requires server running)
+pytest tests/test_e2e.py -v
+
+# All tests with coverage
+pytest --cov=. --cov-report=html
+```
+
+### Test Coverage
+The test suite achieves 100% code coverage on both `operations.py` and `main.py`.
+
+## Project Structure
+
+```
+fastapi_calculator/
+├── main.py                 # FastAPI application with endpoints
+├── operations.py           # Calculator operation functions
+├── requirements.txt        # Production dependencies
+├── requirements-test.txt   # Test dependencies
+├── pyproject.toml         # Pytest configuration
+├── run_tests.sh           # Test runner script
+├── tests/
+│   ├── __init__.py
+│   ├── test_operations.py # Unit tests
+│   ├── test_main.py       # Integration tests
+│   ├── test_e2e.py        # End-to-end tests
+│   └── README.md          # Test documentation
+└── README.md              # This file
+```
