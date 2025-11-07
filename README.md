@@ -1,5 +1,11 @@
 # FastAPI Calculator
 
+[![CI](https://github.com/Ishita-Kulkarni/assignment_8/workflows/FastAPI%20Calculator%20CI/badge.svg)](https://github.com/Ishita-Kulkarni/assignment_8/actions)
+[![Code Quality](https://github.com/Ishita-Kulkarni/assignment_8/workflows/Code%20Quality%20&%20Security/badge.svg)](https://github.com/Ishita-Kulkarni/assignment_8/actions)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/Ishita-Kulkarni/assignment_8)
+
 A simple calculator API built with FastAPI that performs basic arithmetic operations.
 
 ## Features
@@ -182,6 +188,28 @@ tail -f logs/app.log
 
 For detailed logging documentation, see [LOGGING.md](LOGGING.md)
 
+## Continuous Integration
+
+The project uses GitHub Actions for automated testing and quality checks.
+
+### Workflows
+- **CI Pipeline**: Runs tests on Python 3.9, 3.10, 3.11, and 3.12
+- **Code Quality**: Linting, formatting, and security checks
+- **Deployment**: Automated deployment on release
+
+### What Gets Tested
+✅ Unit tests (37 tests)  
+✅ Integration tests (37 tests)  
+✅ Logging tests (26 tests)  
+✅ Code coverage (100% on core modules)  
+✅ Code linting and formatting  
+✅ Security vulnerability scanning  
+
+### CI Status
+Check the [Actions tab](https://github.com/Ishita-Kulkarni/assignment_8/actions) for workflow status and results.
+
+For detailed CI/CD documentation, see [CI_CD.md](CI_CD.md)
+
 ## Project Structure
 
 ```
@@ -197,6 +225,11 @@ fastapi_calculator/
 ├── logs/                  # Log files directory
 │   ├── app.log            # Application logs
 │   └── error.log          # Error logs
+├── .github/               # GitHub Actions workflows
+│   └── workflows/
+│       ├── ci.yml         # CI pipeline
+│       ├── code-quality.yml  # Code quality checks
+│       └── deploy.yml     # Deployment workflow
 ├── tests/
 │   ├── __init__.py
 │   ├── test_operations.py # Unit tests
