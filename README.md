@@ -197,13 +197,15 @@ The project uses GitHub Actions for automated testing and quality checks.
 - **Code Quality**: Linting, formatting, and security checks
 - **Deployment**: Automated deployment on release
 
-### What Gets Tested
+### What Gets Tested in CI
 ✅ Unit tests (37 tests)  
 ✅ Integration tests (37 tests)  
 ✅ Logging tests (26 tests)  
 ✅ Code coverage (100% on core modules)  
 ✅ Code linting and formatting  
 ✅ Security vulnerability scanning  
+
+**Note**: E2E tests are available but run separately due to browser dependencies. Run locally with `pytest tests/test_e2e.py -v`  
 
 ### CI Status
 Check the [Actions tab](https://github.com/Ishita-Kulkarni/assignment_8/actions) for workflow status and results.

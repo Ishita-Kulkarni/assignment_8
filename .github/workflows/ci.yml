@@ -30,11 +30,6 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements-test.txt
     
-    - name: Install Playwright browsers
-      run: |
-        playwright install chromium
-        playwright install-deps
-    
     - name: Lint with flake8
       run: |
         pip install flake8
@@ -57,6 +52,8 @@ jobs:
     
     - name: Run all tests with coverage
       run: |
+        # Note: E2E tests (test_e2e.py) are excluded from CI due to Playwright dependencies
+        # They can be run locally with: pytest tests/test_e2e.py -v
         pytest tests/test_operations.py tests/test_main.py tests/test_logging.py -v --cov=. --cov-report=xml --cov-report=term-missing
     
     - name: Upload coverage to Codecov

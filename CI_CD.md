@@ -15,8 +15,8 @@ The FastAPI Calculator project uses GitHub Actions for automated testing, code q
   - Integration tests (`test_main.py`)
   - Logging tests (`test_logging.py`)
   - Coverage reporting
+  - **Note**: E2E tests are excluded from main CI (run separately or locally)
 - **Code Linting**: Flake8 for syntax and style checks
-- **Browser Testing**: Playwright browser installation for E2E tests
 - **Coverage Upload**: Automatic upload to Codecov
 - **Artifacts**: Test results and logs saved for all Python versions
 - **Build Verification**: Ensures application can start successfully
@@ -40,7 +40,16 @@ strategy:
 - **Dependency Check**: Safety for known CVEs in dependencies
 - **Dependency Review**: Automated review for pull requests
 
-### 3. Deployment Workflow (`.github/workflows/deploy.yml`)
+### 3. E2E Tests Workflow (`.github/workflows/e2e-tests.yml`)
+**Triggers:** Manual dispatch and Weekly schedule
+
+#### Features:
+- **Optional E2E Testing**: Playwright-based browser tests
+- **Separate Environment**: Ubuntu 22.04 for better compatibility
+- **Manual Trigger**: Run on-demand via workflow_dispatch
+- **Weekly Schedule**: Automated weekly checks
+
+### 4. Deployment Workflow (`.github/workflows/deploy.yml`)
 **Triggers:** Release publication and Manual dispatch
 
 #### Features:
@@ -129,6 +138,20 @@ pytest tests/test_logging.py -v --tb=short
 pytest tests/test_operations.py tests/test_main.py tests/test_logging.py -v \
   --cov=. --cov-report=xml --cov-report=term-missing
 ```
+
+### E2E Tests (Run Locally or via Manual Workflow)
+```bash
+# Install Playwright browsers first
+playwright install chromium
+
+# Run E2E tests
+pytest tests/test_e2e.py -v
+```
+
+**Note**: E2E tests are excluded from the main CI pipeline due to Playwright dependency complexity in CI environments. They can be:
+- Run locally before pushing
+- Triggered manually via GitHub Actions
+- Run automatically on a weekly schedule
 
 ## Code Quality Checks
 
