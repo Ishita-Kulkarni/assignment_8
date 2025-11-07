@@ -149,21 +149,60 @@ pytest --cov=. --cov-report=html
 ### Test Coverage
 The test suite achieves 100% code coverage on both `operations.py` and `main.py`.
 
+## Logging
+
+The application includes comprehensive logging to track operations and errors.
+
+### Log Files
+- `logs/app.log` - All application logs (DEBUG, INFO, WARNING, ERROR)
+- `logs/error.log` - Error logs only (ERROR, CRITICAL)
+
+### What Gets Logged
+- ✓ All HTTP requests and responses with duration
+- ✓ Calculator operations (inputs and results)
+- ✓ Errors and exceptions with full stack traces
+- ✓ Application startup and shutdown events
+
+### Log Rotation
+- Max file size: 10 MB
+- Backup count: 5 files
+- Automatic rotation when size limit is reached
+
+### Viewing Logs
+```bash
+# View all logs
+cat logs/app.log
+
+# View errors only
+cat logs/error.log
+
+# Follow logs in real-time
+tail -f logs/app.log
+```
+
+For detailed logging documentation, see [LOGGING.md](LOGGING.md)
+
 ## Project Structure
 
 ```
 fastapi_calculator/
 ├── main.py                 # FastAPI application with endpoints
 ├── operations.py           # Calculator operation functions
+├── logger_config.py        # Logging configuration
 ├── requirements.txt        # Production dependencies
 ├── requirements-test.txt   # Test dependencies
 ├── pyproject.toml         # Pytest configuration
 ├── run_tests.sh           # Test runner script
+├── LOGGING.md             # Logging documentation
+├── logs/                  # Log files directory
+│   ├── app.log            # Application logs
+│   └── error.log          # Error logs
 ├── tests/
 │   ├── __init__.py
 │   ├── test_operations.py # Unit tests
 │   ├── test_main.py       # Integration tests
 │   ├── test_e2e.py        # End-to-end tests
+│   ├── test_logging.py    # Logging tests
 │   └── README.md          # Test documentation
 └── README.md              # This file
 ```
