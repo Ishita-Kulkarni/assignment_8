@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Optional
 import time
@@ -13,6 +15,9 @@ app = FastAPI(
     description="A simple calculator API built with FastAPI",
     version="1.0.0"
 )
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Log application startup
 logger.info("FastAPI Calculator application starting...")
@@ -78,11 +83,18 @@ class CalculationResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    """Root endpoint returning welcome message"""
-    logger.info("Root endpoint accessed")
+    """Serve the calculator web interface"""
+    logger.info("Root endpoint accessed - serving calculator interface")
+    return FileResponse("static/index.html")
+
+@app.get("/api")
+async def api_info():
+    """API information endpoint"""
+    logger.info("API info endpoint accessed")
     return {
-        "message": "Welcome to FastAPI Calculator!",
+        "message": "Welcome to FastAPI Calculator API!",
         "endpoints": {
+            "/": "Calculator web interface",
             "/docs": "API documentation",
             "/calculate": "Perform calculations"
         }

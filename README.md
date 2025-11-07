@@ -6,16 +6,24 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/Ishita-Kulkarni/assignment_8)
 
-A simple calculator API built with FastAPI that performs basic arithmetic operations.
+A beautiful, interactive calculator web application built with FastAPI that performs basic arithmetic operations. Features a modern UI with real-time calculations and comprehensive API backend.
 
 ## Features
 
-- Addition
-- Subtraction
-- Multiplication
-- Division (with zero-division error handling)
+🧮 **Web Calculator Interface**
+- Beautiful, responsive web UI
+- Real-time calculations
+- Support for all arithmetic operations
+- Keyboard support (Enter to calculate)
+- Error handling with user-friendly messages
+
+🔧 **API Backend**
+- RESTful API for calculations
+- Addition, Subtraction, Multiplication, Division
+- Zero-division error handling
 - Interactive API documentation (Swagger UI)
 - Input validation with Pydantic
+- Comprehensive logging
 
 ## Requirements
 
@@ -51,11 +59,20 @@ uvicorn main:app --reload
 
 The application will be available at: `http://localhost:8000`
 
-## API Documentation
+## Using the Calculator
 
 Once the server is running, visit:
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
+- **Web Calculator**: `http://localhost:8000` - Interactive calculator interface
+- **API Docs**: `http://localhost:8000/docs` - Swagger UI for API testing
+- **Alternative Docs**: `http://localhost:8000/redoc` - ReDoc documentation
+- **API Info**: `http://localhost:8000/api` - API information endpoint
+
+### Web Interface
+Simply open your browser and navigate to `http://localhost:8000`. You'll see a beautiful calculator interface where you can:
+1. Enter two numbers
+2. Select an operation (Add, Subtract, Multiply, Divide)
+3. Click "Calculate" or press Enter
+4. See the result displayed instantly
 
 ## API Endpoints
 
@@ -224,6 +241,8 @@ fastapi_calculator/
 ├── pyproject.toml         # Pytest configuration
 ├── run_tests.sh           # Test runner script
 ├── LOGGING.md             # Logging documentation
+├── static/                # Static files (web interface)
+│   └── index.html         # Calculator web UI
 ├── logs/                  # Log files directory
 │   ├── app.log            # Application logs
 │   └── error.log          # Error logs
@@ -231,6 +250,7 @@ fastapi_calculator/
 │   └── workflows/
 │       ├── ci.yml         # CI pipeline
 │       ├── code-quality.yml  # Code quality checks
+│       ├── e2e-tests.yml  # E2E tests (optional)
 │       └── deploy.yml     # Deployment workflow
 ├── tests/
 │   ├── __init__.py
